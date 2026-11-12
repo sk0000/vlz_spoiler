@@ -80,6 +80,7 @@
 <head>
   <meta charset="utf-8">
   <title>Пример спойлера</title>
+  <script src="js/jquery-1.8.3.min.js"></script>
   <script src="/path/to/vlz_spoiler/include.min.js"></script>
 </head>
 <body>
