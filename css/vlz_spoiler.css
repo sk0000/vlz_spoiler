@@ -58,4 +58,8 @@
   color: #04196A;
   font-size: 0.8em;
   margin: 10px 0 -15px 0;
+}
+.vlz_spoiler .err_load {
+  color: red;
+  font-style: italic;
 }/*# sourceMappingURL=vlz_spoiler.css.map */
