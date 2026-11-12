@@ -1,0 +1,61 @@
+/***********  SPOILER style  ***********/
+.vlz_spoiler {
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1em;
+  margin: 10px 0;
+  padding: 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #999;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.vlz_spoiler h5 {
+  display: block;
+  margin: 0;
+  padding: 5px 5px 5px 2em;
+  font-size: 1.2em;
+  font-weight: normal;
+  cursor: pointer;
+  background-color: silver;
+}
+.vlz_spoiler.closed h5 {
+  background: url("../img/icon_plus_1.gif") no-repeat scroll 0.75em center #EEE; /*transparent*/
+  border-radius: 5px;
+}
+.vlz_spoiler.closed div {
+  display: block;
+}
+.vlz_spoiler.open h5 {
+  background: url("../img/icon_minus_1.gif") no-repeat scroll 0.75em center #EEE; /*transparent*/
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px; /**/
+}
+.vlz_spoiler.open div {
+  display: block;
+}
+.vlz_spoiler > div {
+  display: block;
+  padding: 15px;
+  background-color: transparent;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.vlz_spoiler .btm_fold {
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  border-top: 1px dotted #999;
+  color: #04196A;
+  font-size: 0.8em;
+  margin: 10px 0 -15px 0;
+}/*# sourceMappingURL=vlz_spoiler.css.map */
