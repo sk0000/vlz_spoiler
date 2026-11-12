@@ -2,14 +2,9 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Документ без названия</title>
+<title>Примеры использования VLZ-спойлеров</title>
 
-<!-- ! ! ! Подключить правильно jquery !!! 
-<script src="../../jquery-1.8.3.min.js"></script>-->
-<script src="js/jquery-1.8.3.min.js"></script>
-
-
-<script src="include.js"></script>
+<script src="include.min.js"></script>
 </head>
 
 <body>
@@ -17,7 +12,7 @@
   
   <h2>Примеры использования VLZ-спойлеров</h2>
   <div class="vlz_spoiler">
-    <h5>Пример 1: Здесь располагается заголовок для "закрытого" spoiler </h5>
+    <h5>Пример 1: Свернутый по умолчанию "spoiler"</h5>
     <div> 
       Здесь располагается содержимое "spoiler"
     </div>
@@ -27,24 +22,10 @@
   <hr>
   <br>
 
-  <div class="vlz_spoiler " data-load="ajax_content.html">
-    <h5>Пример 2: Здесь располагается заголовок для spoiler с подгружаемым контентом </h5>
-    <div> идет загрузка... </div>
-  </div>
-
-  <div class="vlz_spoiler " data-load="ajax_content2.html">
-    <h5>Пример 2а: Здесь располагается заголовок для spoiler с ошибочным подгружаемым контентом </h5>
-    <div> идет загрузка... </div>
-  </div>
-
-  <br>
-  <hr>
-  <br>
-
   <div class="vlz_spoiler open">
-    <h5>Пример 3: Здесь располагается заголовок для spoiler open </h5>
+    <h5>Пример 2: Открытый по умолчанию "spoiler"</h5>
     <div> 
-      Здесь располагается содержимое  "spoiler"<br>
+      Здесь располагается содержимое открытого "spoiler"<br>
     </div>
   </div>
 
@@ -52,8 +33,22 @@
   <hr>
   <br>
 
+  <div class="vlz_spoiler " data-load="ajax_content.html">
+    <h5>Пример 3: "spoiler" с подгружаемым контентом (из файла `ajax_content.html`) </h5>
+    <div> идет загрузка... </div>
+  </div>
+
+  <div class="vlz_spoiler " data-load="ajax_content2.html">
+    <h5>Пример 3а: "spoiler" с ошибочным URL для подгружаемого контента </h5>
+    <div> идет загрузка... </div>
+  </div>
+
+  <br>
+  <hr>
+  <br>
+
   <div class="vlz_spoiler open">
-    <h5>Пример 4: Здесь располагается заголовок для spoiler  </h5>
+    <h5>Пример 4: Вложенные друг в друга spoiler-ы (несколько уровней) </h5>
     <div> 
       <br>
       Здесь располагается содержимое  class "spoiler" c другим вложеным "spoiler"<br>
@@ -61,12 +56,12 @@
       
       <br>
       <div class="vlz_spoiler ">
-        <h5>ZZ. Здесь располагается заголовок для вложенного spoiler</h5>
+        <h5>Level 2. вложенный spoiler №1</h5>
         <div>
-          Здесь располагается содержимое вложенного "spoiler"<br>
+          Здесь располагается содержимое "Level 2" вложенного "spoiler"<br>
 
           <div class="vlz_spoiler ">
-            <h5>ZZ. Здесь располагается заголовок для вложенного spoiler</h5>
+            <h5>Level 3. вложенный spoiler №3</h5>
             <div>
               Здесь располагается содержимое вложенного "spoiler"<br>
                   <div class="btm_fold ">свернуть</div>
@@ -75,7 +70,7 @@
           </div>
 
           <div class="vlz_spoiler open">
-            <h5>ZZ. Здесь располагается заголовок для вложенного spoiler</h5>
+            <h5>Level 3. вложенный открытый spoiler №4</h5>
             <div>
               Здесь располагается содержимое вложенного "spoiler"<br>
                   <div class="btm_fold ">свернуть</div>
@@ -89,7 +84,7 @@
       <br>
       
       <div class="vlz_spoiler open">
-        <h5>ZZ. Здесь располагается заголовок для вложенного spoiler open</h5>
+        <h5>Level 2. вложенный открытый spoiler №2</h5>
         <div>
           Здесь располагается содержимое вложенного "spoiler open"<br>
         </div>
@@ -103,9 +98,9 @@
   <br>
 
    <div class="vlz_spoiler">
-    <h5>Пример 5: Здесь располагается заголовок для spoiler с нижним полем для свертывания </h5>
+    <h5>Пример 5: "spoiler" с нижним полем для сворачивания содержимого</h5>
     <div> 
-      Здесь располагается содержимое spoiler с нижним полем для свертывания<br>
+      Здесь располагается содержимое "spoiler" с нижним полем для сворачивания содержимого<br>
     <div class="btm_fold ">свернуть</div>
     </div>
   </div>
@@ -115,9 +110,9 @@
   <br>
 
    <div class="vlz_spoiler open">
-    <h5>Пример 6: Здесь располагается заголовок для spoiler open с нижним полем для свертывания </h5>
+    <h5>Пример 6: Открытый по умолчанию "spoiler" с нижним полем для сворачивания содержимого</h5>
     <div> 
-      Здесь располагается содержимое  "spoiler"<br>
+      Здесь располагается содержимое "spoiler" с нижним полем для сворачивания содержимого<br>
     <div class="btm_fold ">свернуть</div>
     </div>
   </div>

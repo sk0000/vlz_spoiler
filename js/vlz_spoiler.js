@@ -1,38 +1,95 @@
-// скрипт работы спойлеров
-$(document).ready(function(){
+(function () {
+	var load_content = new WeakMap();
+	var loading = new WeakSet();
 
-	// инициируем спойлеры. если не указан класс open то добавляем класс closed
-	$('.vlz_spoiler').each(function(){ 
-		if ( !$(this).hasClass("open") ) { 
-			// $(this).addClass("closed").find('div').hide();
-			$(this).addClass("closed").children('div').first().hide();
-		}   
-	});
+	function getBody(header) {
+		var body = header.nextElementSibling;
+		return body && body.tagName === 'DIV' ? body : null;
+	}
 
+	function setOpen(spoiler, body, open) {
+		spoiler.classList.toggle('open', open);
+		spoiler.classList.toggle('closed', !open);
+		body.style.display = open ? '' : 'none';
+	}
 
-	$('.vlz_spoiler>h5').click(function(){
-		let spoiler = $(this).parent();
-		let load_url = spoiler.data('load');
-		let load_content = spoiler.data('load_content');
-		spoiler.toggleClass("closed").toggleClass("open"); // .next().slideToggle("fast")
-		let spoiler_body = $(this).next('div');
-		spoiler_body.slideToggle("fast");
-		if(load_url !== undefined && spoiler.hasClass("open") && load_content === undefined && !spoiler.data('loading')){
-			spoiler.data('loading', true);
-			spoiler_body.load(load_url, function(responseText, status){
-				spoiler.data('loading', false);
-				if(status === 'success' || status === 'notmodified'){
-					load_content = responseText;
-					spoiler.data('load_content', load_content);
-				}else{
-					spoiler_body.html('<span class="err_load">Не удалось загрузить содержимое.</span>');
+	function loadContent(spoiler, body) {
+		var url = spoiler.getAttribute('data-load');
+		if (url === null || load_content.has(spoiler) || loading.has(spoiler)) {
+			return;
+		}
+
+		loading.add(spoiler);
+		Promise.resolve()
+			.then(function () {
+				return fetch(url);
+			})
+			.then(function (response) {
+				if (!response.ok) {
+					throw new Error('HTTP ' + response.status);
+				}
+				return response.text();
+			})
+			.then(function (content) {
+				load_content.set(spoiler, content);
+				body.innerHTML = content;
+			})
+			.catch(function (error) {
+				var message = document.createElement('span');
+				message.className = 'err_load';
+				message.textContent = 'Не удалось загрузить содержимое.';
+				body.innerHTML = '';
+				body.appendChild(message);
+				console.error('VLZ spoiler: не удалось загрузить содержимое "' + url + '".', error);
+			})
+			.finally(function () {
+				loading.delete(spoiler);
+			});
+	}
+
+	function initialize() {
+		document.querySelectorAll('.vlz_spoiler').forEach(function (spoiler) {
+			var header = Array.from(spoiler.children).find(function (child) {
+				return child.tagName === 'H5';
+			});
+			var body = header && getBody(header);
+
+			if (!spoiler.classList.contains('open')) {
+				spoiler.classList.add('closed');
+				if (body) {
+					body.style.display = 'none';
+				}
+			}
+
+			if (!header || !body) {
+				return;
+			}
+
+			header.addEventListener('click', function () {
+				var open = !spoiler.classList.contains('open');
+				setOpen(spoiler, body, open);
+				if (open) {
+					loadContent(spoiler, body);
 				}
 			});
-		}
-	})
+		});
 
-	$('.vlz_spoiler .btm_fold').click(function(){
-		$(this).parent().parent().toggleClass("closed").toggleClass("open"); // .next().slideToggle("fast")
-		$(this).parent().slideToggle("fast");
-	})
-});//$(document).ready
+		document.querySelectorAll('.vlz_spoiler .btm_fold').forEach(function (fold) {
+			fold.addEventListener('click', function () {
+				var body = fold.parentElement;
+				var spoiler = body && body.parentElement;
+				if (!spoiler || !spoiler.classList.contains('vlz_spoiler')) {
+					return;
+				}
+
+				setOpen(spoiler, body, !spoiler.classList.contains('open'));
+			});
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initialize, { once: true });
+	} else {
+		initialize();
+	}
+})();
